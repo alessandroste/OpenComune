@@ -1,0 +1,4 @@
+<resources>
+    <color name="background_tab_pressed">#66f0ee3b</color>
+    <color name="background_window">#FFE5E5E5</color>
+</resources>
