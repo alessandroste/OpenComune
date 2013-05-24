@@ -21,14 +21,11 @@ import android.support.v4.app.Fragment;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class CardFragment extends Fragment {
 
@@ -75,36 +72,30 @@ public class CardFragment extends Fragment {
 		switch (position){
 		case 0: //notizie
 		{
-			Button cliccami = new Button(getActivity());
-			cliccami.setText("Cliccami");
-			layoutvert.addView(cliccami);
+			LinearLayout listanotizie = (LinearLayout) inflater.inflate(R.layout.notizie, null);
+			listanotizie.setLayoutParams(params);
+			layoutvert.addView(listanotizie);
 			break;
 		}
 		case 1: //segnala
 		{
-			final TextView testo = new TextView(getActivity());
-			testo.setText("Non hai cliccato");
-			LayoutParams parametri = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-			parametri.setMargins(10,10,10,10);
-			testo.setLayoutParams(parametri);
-			layoutvert.addView(testo);
-			Button pulsante = new Button(getActivity());
-			pulsante.setText("Invia");
-			pulsante.setOnClickListener(new OnClickListener()
-		    {
-		      public void onClick(View v)
-		      {
-		    	  if (testo.getText()=="Non hai cliccato") 
-		    	  {
-		    		  testo.setText("Hai cliccato");
-		    	  }
-		    	  else
-		    	  {
-		    		 testo.setText("Non hai cliccato"); 
-		    	  };
-		      }
-		    });
-			layoutvert.addView(pulsante);
+			LinearLayout listasegnala = (LinearLayout) inflater.inflate(R.layout.segnala, null);
+			listasegnala.setLayoutParams(params);
+			layoutvert.addView(listasegnala);
+			break;
+		}
+		case 2: //modulistica
+		{
+			LinearLayout listamoduli = (LinearLayout) inflater.inflate(R.layout.moduli, null);
+			listamoduli.setLayoutParams(params);
+			layoutvert.addView(listamoduli);
+			break;
+		}
+		case 3: //info
+		{
+			ScrollView infos = (ScrollView) inflater.inflate(R.layout.info, null);
+			infos.setLayoutParams(params);
+			layoutvert.addView(infos);
 			break;
 		}
 		};

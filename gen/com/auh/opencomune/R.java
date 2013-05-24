@@ -8,6 +8,9 @@
 package com.auh.opencomune;
 
 public final class R {
+    public static final class array {
+        public static final int destinazioni=0x7f070000;
+    }
     public static final class attr {
         /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
@@ -110,6 +113,8 @@ containing a value of this type.
     public static final class color {
         public static final int background_tab_pressed=0x7f040000;
         public static final int background_window=0x7f040001;
+        public static final int splashbottom=0x7f040003;
+        public static final int splashtop=0x7f040002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -120,26 +125,62 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int marginigenerici=0x7f050002;
     }
     public static final class drawable {
         public static final int background_tab=0x7f020000;
         public static final int ic_launcher=0x7f020001;
+        public static final int icon=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f090002;
-        public static final int pager=0x7f090001;
-        public static final int tabs=0x7f090000;
+        public static final int action_settings=0x7f0a0013;
+        public static final int contenitore=0x7f0a0009;
+        public static final int infotesto1=0x7f0a0003;
+        public static final int infotesto2=0x7f0a0004;
+        public static final int listamoduli=0x7f0a0007;
+        public static final int logo=0x7f0a0002;
+        public static final int notifica=0x7f0a000a;
+        public static final int notiziecont=0x7f0a000b;
+        public static final int pager=0x7f0a0001;
+        public static final int richiedimoduli=0x7f0a0005;
+        public static final int sceltasegnala=0x7f0a000c;
+        public static final int scorrinotizie=0x7f0a0008;
+        public static final int scroll=0x7f0a0006;
+        public static final int segnalainvia=0x7f0a0010;
+        public static final int tableRow1=0x7f0a0011;
+        public static final int tableRow2=0x7f0a0012;
+        public static final int tabs=0x7f0a0000;
+        public static final int txtcognome=0x7f0a000e;
+        public static final int txtnome=0x7f0a000d;
+        public static final int txttesto=0x7f0a000f;
     }
     public static final class layout {
         public static final int activity_principale=0x7f030000;
+        public static final int divisore=0x7f030001;
+        public static final int info=0x7f030002;
+        public static final int moduli=0x7f030003;
+        public static final int modulo=0x7f030004;
+        public static final int notizia=0x7f030005;
+        public static final int notizie=0x7f030006;
+        public static final int segnala=0x7f030007;
+        public static final int splash=0x7f030008;
     }
     public static final class menu {
-        public static final int principale=0x7f080000;
+        public static final int principale=0x7f090000;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int cognometesto=0x7f060005;
+        public static final int descrizionelogo=0x7f060009;
+        public static final int info1=0x7f06000a;
+        public static final int info2=0x7f06000b;
         public static final int lorem=0x7f060002;
+        public static final int nometesto=0x7f060004;
+        public static final int ricaricanotizie=0x7f060007;
+        public static final int richiedimoduli=0x7f060008;
+        public static final int segnalainvia=0x7f060003;
+        public static final int segnalazionetesto=0x7f060006;
     }
     public static final class style {
         /** 
@@ -163,11 +204,12 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
+        public static final int AppTheme=0x7f080001;
+        public static final int div=0x7f080002;
     }
     public static final class styleable {
         /** Attributes that can be used with a PagerSlidingTabStrip.

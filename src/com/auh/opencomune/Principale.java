@@ -1,9 +1,14 @@
 package com.auh.opencomune;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
+import android.net.Uri;
 import android.os.Bundle;
-import android.graphics.Color;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,19 +18,24 @@ import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
 
 public class Principale extends FragmentActivity {
 
-	//private final Handler handler = new Handler();
-	
-	Connection conn=null;
-	
+	public int numeronotizie = 0;
+	public int numeromoduli = 0;
+	public ArrayList <ArrayList <String>> moduli;
+	public ArrayList <String> notizie;
 	
 	private PagerSlidingTabStrip tabs;
 	private ViewPager pager;
 	private MyPagerAdapter adapter;
 
-	//private Drawable oldBackground = null;
 	private int currentColor = 0xFFF4842D;
 
 	@Override
@@ -58,7 +68,191 @@ public class Principale extends FragmentActivity {
 
 		return super.onOptionsItemSelected(item);
 	}
-
+	
+	public ArrayList <ArrayList <String>> ricevimoduli()
+	{
+		ArrayList <ArrayList <String>> risultato = new ArrayList<ArrayList <String>>();
+		Connection conn = null;
+		Statement mess = null;
+		ResultSet ris = null;
+		
+		String url = "jdbc:mysql://db4free.net:3306/";
+        String nomedb = "auhprojectdb";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "auhcoders";
+        String password = "auh2013";
+        String query = "SELECT `Tipo modulo`,Link FROM Servizi;";       
+        
+        try {
+          Class.forName(driver).newInstance();
+          conn = DriverManager.getConnection(url+nomedb,username,password);
+          mess = conn.createStatement();
+          ris = mess.executeQuery(query);
+          
+          int i=0;
+          while (ris.next()) 
+          {
+        	  ArrayList <String> riga = new ArrayList<String>();
+        	  riga.add(ris.getString(1));
+        	  riga.add(ris.getString(2));
+        	  risultato.add(riga);
+        	  i++;
+          }
+          numeromoduli=i;
+          ris.close();
+          mess.close();
+          conn.close();
+          
+          Toast.makeText(this, "Connessione riuscita, "+numeromoduli+" elementi", Toast.LENGTH_SHORT).show();
+          
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        return risultato;
+	}
+	
+	public ArrayList <String> ricevinotizie()
+	{
+		
+		ArrayList <String> risultato = new ArrayList<String>();
+		Connection conn = null;
+		Statement mess = null;
+		ResultSet ris = null;
+		
+		String url = "jdbc:mysql://db4free.net:3306/";
+        String nomedb = "auhprojectdb";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "auhcoders";
+        String password = "auh2013";
+        String query = "SELECT notizie FROM Notizie;";       
+        
+        try {
+          Class.forName(driver).newInstance();
+          conn = DriverManager.getConnection(url+nomedb,username,password);
+          mess = conn.createStatement();
+          ris = mess.executeQuery(query);
+          
+          int i =0;
+          while (ris.next()) 
+          {
+        	  risultato.add(ris.getString(1));
+        	  i++;
+          }
+          
+          numeronotizie=i;
+          ris.close();
+          mess.close();
+          conn.close();
+          
+          Toast.makeText(this, "Connessione riuscita, "+numeronotizie+" elementi", Toast.LENGTH_SHORT).show();
+          
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+        }
+        return risultato;
+	}
+	
+	public int inviadati(String dest,String nome, String cognome, String testo)
+	{
+		Connection conn = null;
+		Statement mess = null;
+		int aggiorna = 0;
+		
+		String url = "jdbc:mysql://db4free.net:3306/";
+        String nomedb = "auhprojectdb";
+        String driver = "com.mysql.jdbc.Driver";
+        String username = "auhcoders";
+        String password = "auh2013";
+        String query = "INSERT INTO Segnalazioni (nome,cognome,destinazione,segnalazione) VALUES ('"+nome+"','"+cognome+"','"+dest+"','"+testo+"');";       
+        
+        try {
+          Class.forName(driver).newInstance();
+          conn = DriverManager.getConnection(url+nomedb,username,password);
+          Toast.makeText(this, "Connessione riuscita", Toast.LENGTH_SHORT).show();
+          mess=conn.createStatement();
+          aggiorna = mess.executeUpdate(query);
+          if (aggiorna != 0) {
+        	  Toast.makeText(this, "Invio effettuato", Toast.LENGTH_SHORT).show();
+        	  mess.close();
+        	  conn.close();
+        	  }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+          return 1;
+        }
+      
+		return 0;
+	}
+	
+	public void onClick (View v){
+		switch (v.getId())
+		{
+		case R.id.segnalainvia:
+		{
+			EditText casellanome = (EditText) findViewById(R.id.txtnome);
+			EditText casellacognome = (EditText) findViewById(R.id.txtcognome);
+			EditText casellatesto = (EditText) findViewById(R.id.txttesto);
+			if (casellanome.getText().toString().matches("") || casellacognome.getText().toString().matches("") || casellatesto.getText().toString().matches("")) 
+			{
+				Toast.makeText(this, "Riempi tutti i campi", Toast.LENGTH_SHORT).show();
+				
+			}
+			else
+			{
+				Spinner scelta = (Spinner) findViewById(R.id.sceltasegnala);
+				inviadati(scelta.getSelectedItem().toString(),casellanome.getText().toString(),casellacognome.getText().toString(),casellatesto.getText().toString());
+				casellanome.setText("");
+				casellacognome.setText("");
+				casellatesto.setText("");
+			}
+			break;
+		}
+		case R.id.notifica:
+		{	
+			notizie = ricevinotizie();
+			LinearLayout listanotizie = (LinearLayout) findViewById(R.id.notiziecont);
+			listanotizie.removeAllViewsInLayout();
+			if (numeronotizie!=0)
+			{
+				for (int i=0; i<numeronotizie;i++)
+				{
+					TextView casella = (TextView) getLayoutInflater().inflate(R.layout.notizia, null);
+					casella.setText(notizie.get(i));
+					listanotizie.addView(casella);
+					View divider = (View) getLayoutInflater().inflate(R.layout.divisore, null);
+					listanotizie.addView(divider);
+				}
+			}
+			break;
+		}
+		case R.id.richiedimoduli:
+		{
+			moduli = ricevimoduli();
+			LinearLayout listamoduli = (LinearLayout) findViewById(R.id.listamoduli);
+			listamoduli.removeAllViewsInLayout();
+			if (numeromoduli!=0)
+			{
+				for (int i=0; i<numeromoduli;i++)
+				{
+					ArrayList <String> riga = new ArrayList<String>();
+					riga = moduli.get(i);
+					TextView casella = (TextView) getLayoutInflater().inflate(R.layout.modulo,null);
+					casella.setText(riga.get(0));
+					casella.setTag(i);
+					listamoduli.addView(casella);
+					View divider = (View) getLayoutInflater().inflate(R.layout.divisore, null);
+					listamoduli.addView(divider);
+					
+				}
+			}
+			break;
+		}
+		}
+	}
+	
 	private void changeColor(int newColor) {
 
 		tabs.setIndicatorColor(newColor);
@@ -106,10 +300,14 @@ public class Principale extends FragmentActivity {
 
 	}
 
-	public void onColorClicked(View v) {
+	public void onmoduloclicked(View v) {
 
-		int color = Color.parseColor(v.getTag().toString());
-		changeColor(color);
+		int i = Integer.parseInt(v.getTag().toString());
+		ArrayList <String> riga = new ArrayList<String>();
+		riga = moduli.get(i);
+		String url = riga.get(1);
+		Intent navigaIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		startActivity(navigaIntent);
 
 	}
 
@@ -126,28 +324,9 @@ public class Principale extends FragmentActivity {
 		changeColor(currentColor);
 	}
     
-	/*
-    private Drawable.Callback drawableCallback = new Drawable.Callback() {
-		@Override
-		public void invalidateDrawable(Drawable who) {
-			getActionBar().setBackgroundDrawable(who);
-		}
-
-		@Override
-		public void scheduleDrawable(Drawable who, Runnable what, long when) {
-			handler.postAtTime(what, when);
-		}
-
-		@Override
-		public void unscheduleDrawable(Drawable who, Runnable what) {
-			handler.removeCallbacks(what);
-		}
-	};
-    */
-	
 	public class MyPagerAdapter extends FragmentPagerAdapter {
 
-		private final String[] TITLES = { "Notizie", "Segnala", "Servizi", "Info" };
+		private final String[] TITLES = { "Notizie", "Segnala", "Modulistica", "Info" };
 
 		public MyPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -170,4 +349,5 @@ public class Principale extends FragmentActivity {
 
 	}
     
+		
 }
