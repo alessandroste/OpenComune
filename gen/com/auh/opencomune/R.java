@@ -133,7 +133,7 @@ containing a value of this type.
         public static final int icon=0x7f020002;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0013;
+        public static final int action_settings=0x7f0a0016;
         public static final int contenitore=0x7f0a0009;
         public static final int infotesto1=0x7f0a0003;
         public static final int infotesto2=0x7f0a0004;
@@ -146,13 +146,16 @@ containing a value of this type.
         public static final int sceltasegnala=0x7f0a000c;
         public static final int scorrinotizie=0x7f0a0008;
         public static final int scroll=0x7f0a0006;
-        public static final int segnalainvia=0x7f0a0010;
-        public static final int tableRow1=0x7f0a0011;
-        public static final int tableRow2=0x7f0a0012;
+        public static final int segnalainvia=0x7f0a0013;
+        public static final int tableRow1=0x7f0a0014;
+        public static final int tableRow2=0x7f0a0015;
         public static final int tabs=0x7f0a0000;
         public static final int txtcognome=0x7f0a000e;
+        public static final int txtdata=0x7f0a0010;
+        public static final int txtluogo=0x7f0a0011;
         public static final int txtnome=0x7f0a000d;
-        public static final int txttesto=0x7f0a000f;
+        public static final int txtora=0x7f0a000f;
+        public static final int txttesto=0x7f0a0012;
     }
     public static final class layout {
         public static final int activity_principale=0x7f030000;
@@ -172,11 +175,14 @@ containing a value of this type.
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int cognometesto=0x7f060005;
+        public static final int datatesto=0x7f06000d;
         public static final int descrizionelogo=0x7f060009;
         public static final int info1=0x7f06000a;
         public static final int info2=0x7f06000b;
         public static final int lorem=0x7f060002;
+        public static final int luogotesto=0x7f06000e;
         public static final int nometesto=0x7f060004;
+        public static final int oratesto=0x7f06000c;
         public static final int ricaricanotizie=0x7f060007;
         public static final int richiedimoduli=0x7f060008;
         public static final int segnalainvia=0x7f060003;

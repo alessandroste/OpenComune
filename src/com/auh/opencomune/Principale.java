@@ -154,7 +154,7 @@ public class Principale extends FragmentActivity {
         return risultato;
 	}
 	
-	public int inviadati(String dest,String nome, String cognome, String testo)
+	public int inviadati(String dest,String nome, String cognome, String testo, String ora, String data, String luogo)
 	{
 		Connection conn = null;
 		Statement mess = null;
@@ -165,7 +165,7 @@ public class Principale extends FragmentActivity {
         String driver = "com.mysql.jdbc.Driver";
         String username = "auhcoders";
         String password = "auh2013";
-        String query = "INSERT INTO Segnalazioni (nome,cognome,destinazione,segnalazione) VALUES ('"+nome+"','"+cognome+"','"+dest+"','"+testo+"');";       
+        String query = "INSERT INTO Segnalazioni (nome,cognome,destinazione,segnalazione,data,ora,luogo) VALUES ('"+nome+"','"+cognome+"','"+dest+"','"+testo+"','"+data+"','"+ora+"','"+luogo+"');";       
         
         try {
           Class.forName(driver).newInstance();
@@ -195,7 +195,10 @@ public class Principale extends FragmentActivity {
 			EditText casellanome = (EditText) findViewById(R.id.txtnome);
 			EditText casellacognome = (EditText) findViewById(R.id.txtcognome);
 			EditText casellatesto = (EditText) findViewById(R.id.txttesto);
-			if (casellanome.getText().toString().matches("") || casellacognome.getText().toString().matches("") || casellatesto.getText().toString().matches("")) 
+			EditText caselladata = (EditText) findViewById(R.id.txtdata);
+			EditText casellaora = (EditText) findViewById(R.id.txtora);
+			EditText casellaluogo = (EditText) findViewById(R.id.txtluogo);
+			if (casellanome.getText().toString().matches("") || casellacognome.getText().toString().matches("") || casellatesto.getText().toString().matches("") || caselladata.getText().toString().matches("") || casellaora.getText().toString().matches("") || casellaluogo.getText().toString().matches("")) 
 			{
 				Toast.makeText(this, "Riempi tutti i campi", Toast.LENGTH_SHORT).show();
 				
@@ -203,10 +206,13 @@ public class Principale extends FragmentActivity {
 			else
 			{
 				Spinner scelta = (Spinner) findViewById(R.id.sceltasegnala);
-				inviadati(scelta.getSelectedItem().toString(),casellanome.getText().toString(),casellacognome.getText().toString(),casellatesto.getText().toString());
+				inviadati(scelta.getSelectedItem().toString(),casellanome.getText().toString(),casellacognome.getText().toString(),casellatesto.getText().toString(),caselladata.getText().toString(),casellaora.getText().toString(),casellaluogo.getText().toString());
 				casellanome.setText("");
 				casellacognome.setText("");
 				casellatesto.setText("");
+				caselladata.setText("");
+				casellaora.setText("");
+				casellaluogo.setText("");
 			}
 			break;
 		}

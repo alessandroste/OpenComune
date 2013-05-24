@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:minHeight="48dip"
     android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -21,7 +22,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/nometesto" >
-
     </EditText>
 
     <EditText
@@ -32,9 +32,37 @@
         android:hint="@string/cognometesto" />
 
     <EditText
+        android:id="@+id/txtora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/oratesto"
+        android:inputType="time" />
+
+    <EditText
+        android:id="@+id/txtdata"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/datatesto"
+        android:inputType="date" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtluogo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/luogotesto"
+        android:inputType="textMultiLine" />
+
+    <EditText
         android:id="@+id/txttesto"
         android:layout_width="match_parent"
-        android:layout_height="200dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.78"
         android:ems="10"
         android:hint="@string/segnalazionetesto"
         android:inputType="textMultiLine"
@@ -44,8 +72,9 @@
     <Button
         android:id="@+id/segnalainvia"
         android:layout_width="match_parent"
-        android:layout_height="50dip"
+        android:layout_height="wrap_content"
         android:layout_margin="10dip"
+        android:minHeight="10dip"
         android:onClick="onClick"
         android:text="@string/segnalainvia" />
 

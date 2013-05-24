@@ -19,5 +19,8 @@
     <string name="descrizionelogo">Icona di OpenComune</string>
     <string name="info1">Open Comune è un programma per Android che ha come scopo la semplificazione della comunicazione tra cittadino e istituzioni comunali.</string>
     <string name="info2">In particolare favorisce la possibilità di intervento degli enti comunali sul territorio e, allo stesso tempo, permette al cittadino di ottenere informazioni utili in qualisiasi momento.</string>
+    <string name="oratesto">Ora</string>
+    <string name="datatesto">Data</string>
+    <string name="luogotesto">Luogo</string>
 
 </resources>
