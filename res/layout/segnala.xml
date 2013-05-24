@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/oratesto"
-        android:inputType="time" />
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/txtdata"
@@ -45,9 +45,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/datatesto"
-        android:inputType="date" >
-
-        <requestFocus />
+        android:inputType="text" >
     </EditText>
 
     <EditText
@@ -61,7 +59,7 @@
     <EditText
         android:id="@+id/txttesto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dip"
         android:layout_weight="0.78"
         android:ems="10"
         android:hint="@string/segnalazionetesto"

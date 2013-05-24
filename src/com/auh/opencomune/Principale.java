@@ -159,7 +159,7 @@ public class Principale extends FragmentActivity {
 		Connection conn = null;
 		Statement mess = null;
 		int aggiorna = 0;
-		
+				
 		String url = "jdbc:mysql://db4free.net:3306/";
         String nomedb = "auhprojectdb";
         String driver = "com.mysql.jdbc.Driver";
